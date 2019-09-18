@@ -10,7 +10,7 @@ RUN mkdir -p /usr/src/dreamcast
 RUN apt-get update
 
 RUN apt-get install -y \
-      bc flex wget gawk bison python3 \
+      texinfo bc flex wget gawk bison python3 \
       build-essential gcc-multilib \
       libc-dev libmpc-dev libncurses5-dev
 

@@ -16,6 +16,7 @@ MY_COPTS="-j4"
 # Dependencies
 BINUTILS_VERSION="2.32"
 GCC_VERSION="8.3.0"
+GDB_VERSION="8.3"
 GLIBC_VERSION="2.30"
 LINUX_VERSION="5.2"
 BUSYBOX_VERSION="1.31.0"
@@ -46,6 +47,11 @@ pushd dreamcast
     tar xJf gcc-${GCC_VERSION}.tar.xz
   fi
 
+  if [ ! -f "gdb-${GDB_VERSION}.tar.xz" ]; then
+    wget ${GNU_MIRROR}/gdb/gdb-${GDB_VERSION}.tar.xz
+    tar xJf gdb-${GDB_VERSION}.tar.xz
+  fi
+
   if [ ! -f "glibc-${GLIBC_VERSION}.tar.xz" ]; then
     wget ${GNU_MIRROR}/glibc/glibc-${GLIBC_VERSION}.tar.xz
     tar xJf glibc-${GLIBC_VERSION}.tar.xz
@@ -71,7 +77,7 @@ pushd dreamcast
   # Preparations
   #
 
-  mkdir -p build-binutils build-gcc build-glibc initrd
+  mkdir -p build-binutils build-gcc build-glibc build-gdb initrd
 
   #
   # Binutils
@@ -151,6 +157,14 @@ pushd dreamcast
 
   pushd build-gcc
     make ${MY_COPTS} all
+    make install
+  popd
+
+  pushd build-gdb
+    ../gdb-${GDB_VERSION}/configure \
+      --target=$TARGET \
+      --prefix=$PREFIX
+    make ${MY_COPTS}
     make install
   popd
 

@@ -9,7 +9,7 @@ base:
 	(cd dreamcast && docker build -t dreamcastlinux:distro .)
 
 dreamcast:
-	(docker run --privileged -t \
+	(docker run --privileged -it \
 		-v "${PWD}/.dreamcast/src:/usr/src/dreamcast" \
 		-v "${PWD}/.dreamcast/opt:/opt/dreamcast" \
 		-v "${PWD}/build:/opt/build" \
