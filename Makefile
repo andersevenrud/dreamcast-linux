@@ -16,6 +16,7 @@ dreamcast:
 		dreamcastlinux:distro)
 
 clean:
+	rm build/*
 	sudo rm -rf .dreamcast
 
 .PHONY: base dreamcast clean

@@ -8,6 +8,7 @@ set -e
 # FIXME: Optimize the staging of GCC and libc. This can be done with newlib probably.
 # TODO: Patch TTYs in busybox
 # TODO: Create a new version of the roaster that creates ISO, not burn directly
+# TODO: More variables for paths
 
 # Customize these to your liking
 GNU_MIRROR="https://gnuftp.uib.no"
@@ -210,18 +211,26 @@ pushd dreamcast
   fi
 
   #
-  # Bootloader
+  # Boot images
   #
 
   pushd sh-boot/tools/dreamcast
     cp ../../../linux-${LINUX_VERSION}/arch/sh/boot/zImage ./zImage.bin
     cp ../../../initrd.bin .
     make clean scramble kernel-boot.bin
+
+    cp kernel-boot.bin /opt/build/
+    cp IP.BIN /opt/build/
+    cp scramble /opt/build/
   popd
 
   #
   # Finalize
   #
+  pushd /opt/build
+    ./scramble kernel-boot.bin 1ST_READ.BIN || exit 1
 
-  cp sh-boot/tools/dreamcast/kernel-boot.bin /opt/build/
+    dd of=audio.raw if=/dev/zero bs=2352 count=300
+    genisoimage -l -r -C 0,11702 -G IP.BIN -o data.iso kernel-boot.bin
+  popd
 popd
