@@ -64,6 +64,7 @@ pushd dreamcast
   if [ ! -d "sh-boot" ]; then
     tar xzf ../sh-boot-20010831-1455.tar.gz
     patch -p0 < ../sh-boot-20010831-1455.diff
+    patch -p0 < ../sh-boot-20010831-1455-sh4.diff
   fi
 
   #
@@ -209,5 +210,4 @@ pushd dreamcast
   #
 
   cp sh-boot/tools/dreamcast/kernel-boot.bin /opt/build/
-
 popd

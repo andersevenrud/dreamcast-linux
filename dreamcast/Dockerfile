@@ -21,6 +21,7 @@ COPY build-dreamcast.sh \
   kernel.config \
   busybox.config \
   sh-boot-20010831-1455.diff \
+  sh-boot-20010831-1455-sh4.diff \
   sh-boot-20010831-1455.tar.gz \
   /usr/src/
 WORKDIR /usr/src
