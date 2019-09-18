@@ -231,6 +231,6 @@ pushd dreamcast
     ./scramble kernel-boot.bin 1ST_READ.BIN || exit 1
 
     dd of=audio.raw if=/dev/zero bs=2352 count=300
-    genisoimage -l -r -C 0,11702 -G IP.BIN -o data.iso kernel-boot.bin
+    genisoimage -l -r -C 0,11702 -G IP.BIN -o data.iso 1ST_READ.BIN
   popd
 popd
