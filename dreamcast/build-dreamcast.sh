@@ -187,7 +187,7 @@ pushd dreamcast
       DOSTATIC=true \
       CFLAGS_EXTRA="-I ${PREFIX}/${TARGET}/include" \
       PREFIX=${INITRD} \
-      clean all install
+      all install
   popd
 
   #
